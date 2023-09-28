@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="static/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Classification Results</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Classification Results</h1>
+        {% if image_path %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ url_for('static', filename=image_path) }}" alt="Uploaded Image">
+        {% endif %}
+        {% if result %}
+        <h2>Classification Result:</h2>
+        <p>{{ result | safe }}</p>
+        {% endif %}
+        <form action="/clear" method="POST">
+            <button class="clear-button" type="submit">Clear</button>
+        </form>
+    </div>
+    <div class="footer">
+        Made by: Chirs
+    </div>
+</body>
+
+</html>
