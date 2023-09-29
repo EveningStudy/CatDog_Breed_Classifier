@@ -1,3 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 utils/dog_classification_resnet152.ort filter=lfs diff=lfs merge=lfs -text
+utils/CatOrDog_vgg16_version2.ort filter=lfs diff=lfs merge=lfs -text
+utils/cat_classification_resnet50.ort filter=lfs diff=lfs merge=lfs -text
