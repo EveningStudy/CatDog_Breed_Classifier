@@ -7,6 +7,21 @@
     <link rel="icon" href="static/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="static/style.css">
     <title>Classification Results</title>
+    <style>
+        .vote-button-small img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .vote-button-small {
+            background-color: transparent;
+            border: none;
+            /* padding: 40px 50px; */
+            /* font-size: 10px; */
+            width: 60px;
+            height: 70px;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,6 +35,14 @@
         <h2>Classification Result:</h2>
         <p>{{ result | safe }}</p>
         {% endif %}
+        <form action="/record_vote" method="POST">
+            <button class="vote-button-small" type="submit" name="vote" value="thumbs_up">
+                <img src="static/up.png" alt="Thumbs Up">
+            </button>
+            <button class="vote-button-small" type="submit" name="vote" value="thumbs_down">
+                <img src="static/down.png" alt="Thumbs Down">
+            </button>
+        </form>
         <form action="/clear" method="POST">
             <button class="clear-button" type="submit">Clear</button>
         </form>

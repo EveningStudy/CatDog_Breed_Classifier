@@ -1,4 +1,5 @@
-body {
+body
+{
     background-image: url('111.jpg');
     background-size: cover;
     background-position: center;
@@ -11,7 +12,8 @@ body {
     min-height: 100vh;
 }
 
-.container {
+.container
+{
     text-align: center;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.73);
@@ -21,21 +23,25 @@ body {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
+h1 
+{
     margin-top: 20px;
     color: #333;
     font-size: 28px;
 }
 
-form {
+form
+{
     margin-top: 20px;
 }
 
-input[type="file"] {
+input[type="file"] 
+{
     margin-right: 10px;
 }
 
-.upload-button {
+.upload-button 
+{
     margin-top: 20px;
     background-color: #4CAF50;
     color: white;
@@ -46,11 +52,13 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.upload-button:hover {
+.upload-button:hover 
+{
     background-color: #45a049;
 }
 
-.button {
+.button 
+{
     display: block;
     margin-top: 20px;
     text-decoration: none;
@@ -63,11 +71,13 @@ input[type="file"] {
     transition: background-color 0.3s;
 }
 
-.button:hover {
+.button:hover
+{
     background-color: #ddd;
 }
 
-.clear-button {
+.clear-button
+{
     background-color: #FF5733;
     color: white;
     border: none;
@@ -77,11 +87,13 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.clear-button:hover {
+.clear-button:hover
+{
     background-color: #ff4833;
 }
 
-.footer {
+.footer 
+{
     background-color: rgba(255, 255, 255, 0.73);
     text-align: center;
     font-size: 14px;
@@ -93,7 +105,8 @@ input[type="file"] {
     padding: 10px 0;
 }
 
-.button.about-button {
+.button.about-button
+{
     position: fixed;
     margin-top: 0;
     bottom: 0;
@@ -108,16 +121,19 @@ input[type="file"] {
     z-index: 999;
 }
 
-.button.about-button:hover {
+.button.about-button:hover 
+{
     background-color: #111;
 }
 
-img {
+img 
+{
     max-width: 100%;
     height: auto;
 }
 
-.disclaimer {
+.disclaimer
+{
     margin-top: 20px;
     background-color: #f9f9f9;
     padding: 10px;
@@ -126,11 +142,13 @@ img {
     text-align: left;
 }
 
-.important-notice {
+.important-notice
+{
     text-align: left;
 }
 
 .disclaimer h3,
-.important-notice h3 {
+.important-notice h3 
+{
     text-align: center;
 }

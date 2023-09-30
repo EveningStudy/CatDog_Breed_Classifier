@@ -3,10 +3,12 @@ from werkzeug.utils import secure_filename
 from utils import classification_main_onnxruntime
 import uuid
 import os
+from flask import send_from_directory
 
 def delete_old_images(upload_folder, num_to_delete):
     images = os.listdir(upload_folder)
     images.sort(key=lambda x: os.path.getmtime(os.path.join(upload_folder, x)))
+    
     for i in range(num_to_delete):
         file_to_delete = os.path.join(upload_folder, images[i])
         try:
@@ -23,7 +25,6 @@ static_folder = os.path.join(current_directory, "static")
 app = Flask(__name__,static_folder="static",template_folder="templates")
 app.secret_key = generate_secret_key()
 app.config['UPLOAD_FOLDER'] = os.path.join(current_directory, "static/uploads")
-
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp'}
 
 # if not os.path.exists(os.path.join(current_directory, "uploads")):
@@ -31,10 +32,14 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp'}
 if not os.path.exists(os.path.join(current_directory, "static", "uploads")):
     os.makedirs(os.path.join(current_directory, "static", "uploads"))
 
+results_file_path = os.path.join(current_directory, "static", "results.txt")
+if not os.path.exists(results_file_path):
+    with open(results_file_path, 'w') as file:
+        file.write("Results Log:\n")
+
 
 uploaded_images = os.listdir(app.config['UPLOAD_FOLDER'])
-if len(uploaded_images) > 2:
-    
+if len(uploaded_images) > 20:
     delete_old_images(app.config['UPLOAD_FOLDER'], len(uploaded_images) - 5)
 
 def allowed_file(filename):
@@ -43,7 +48,7 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'user_id' not in session:
-        session['user_id'] = str(uuid.uuid4())  
+        session['user_id'] = str(uuid.uuid4())
 
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -72,7 +77,7 @@ def index():
             image_path = image_path.replace("\\", "/")
             session['result'] = result
             session['image_path'] = image_path
-            return redirect(url_for('results'))
+            return redirect(url_for('results')) 
         else:
             flash('Invalid file type', 'error')
             return redirect(request.url)
@@ -81,6 +86,23 @@ def index():
 @app.route('/results')
 def results():
     return render_template('results.html', result=session.get('result', None), image_path=session.get('image_path', None))
+
+@app.route('/record_vote', methods=['POST'])
+def record_vote():
+    if 'user_id' in session and 'vote' in request.form:
+        user_id = session['user_id']
+        vote = request.form['vote']
+        result_text = session.get('result', None)
+        result_text = result_text.replace("<br>", "\n") if result_text else None
+        if result_text:
+            with open(os.path.join(current_directory, "static", "results.txt"), 'a') as file:
+                file.write(f"User: {user_id}, Vote: {vote}, Result: {result_text}\n\n")
+            
+            flash('Vote recorded successfully!')
+
+        return redirect(url_for('results'))
+
+    return "Vote not recorded"
 
 @app.route('/about')
 def about():
