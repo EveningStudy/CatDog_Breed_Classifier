@@ -1,6 +1,6 @@
 # Web-based Image Classification Project README
 
-This project allows users to upload images of dogs or cats, which are then classified into categories using pre-trained deep learning models. The project is built using Python and the Flask web framework.The server is hosted on Azure, and you can access the web application at [sciescrew.me](https://sciescrew.me).
+This project allows users to upload images of dogs or cats, which are then classified into categories using pre-trained deep learning models. The project is built using Python and the Flask web framework.
 
 # About
 
